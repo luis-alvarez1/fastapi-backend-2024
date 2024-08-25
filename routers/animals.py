@@ -27,6 +27,19 @@ async def get_animal_by_id(id: str):
     if not found:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Animal not found")
     
-@router.post("/")
-async def create_animal(animal: Animal):
-    pass
+@router.post("/", response_model=Animal, status_code=status.HTTP_201_CREATED)
+async def create_animal(animal_body: Animal):
+    
+    new_animal = Animal(id= int(animal_body.id),
+                        name=animal_body.name,
+                        type=animal_body.type,
+                        age=animal_body.age,
+                        habitad=animal_body.habitad)
+    
+    animals_list.append(new_animal)
+    
+    
+    for animal_db in animals_list:
+        if animal_db.id == new_animal.id:
+            return animal_db
+    
