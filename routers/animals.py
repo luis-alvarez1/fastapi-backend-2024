@@ -42,4 +42,29 @@ async def create_animal(animal_body: Animal):
     for animal_db in animals_list:
         if animal_db.id == new_animal.id:
             return animal_db
-    
+        
+
+@router.patch("/{id}", response_model=Animal, status_code=status.HTTP_200_OK)
+async def uptade_animal(id: str, animal_body:Animal):
+	found = False
+
+	for animal in animals_list:
+		if animal.id == int(id):
+			found = True
+			animals_list.remove(animal)
+			animal_to_update =  Animal(id= int(animal_body.id),
+						name=animal_body.name,
+						type=animal_body.type,
+						age=animal_body.age,
+						habitad=animal_body.habitad)
+			animals_list.append(animal_to_update)
+			
+	for animal_db in animals_list:
+		if animal_db.id == animal_to_update.id:
+			return animal_db
+	if not found:
+		raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Animal not found")
+
+	
+ 
+
