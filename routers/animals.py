@@ -1,5 +1,7 @@
 from fastapi import APIRouter, status, HTTPException
 from schemas.animal import Animal
+from config.db import conn
+from models.animal import animal
 
 router = APIRouter(prefix="/animals")
 
@@ -13,7 +15,8 @@ animals_list = [
 
 @router.get("/")
 async def get_all_animals():
-	return animals_list
+
+	return conn.execute(animal.select()).fetchall()
 
 @router.get("/{id}", response_model=Animal, status_code=status.HTTP_200_OK)
 async def get_animal_by_id(id: str):
