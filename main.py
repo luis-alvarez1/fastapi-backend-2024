@@ -6,6 +6,13 @@ from config.db import engine
 import time
 
 
+
+'''
+Creamos las tablas que estén pendientes por crear con:
+	modelo.Base.metadata.create_all(bind=engine)
+ 
+Así con las futuras tablas
+'''
 animal.Base.metadata.create_all(bind=engine)
 
 

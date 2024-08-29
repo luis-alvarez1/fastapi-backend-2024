@@ -3,6 +3,8 @@ from sqlalchemy.orm import Session
 from models.animal import Animal as AnimalModel
 from schemas.animal import Animal as AnimalSchema
 
+# En este archivo van las funciones que interactúan con la DB
+
 def get_animals(db: Session):
     # devuelve los animales de DB
     return db.query(AnimalModel).all()
