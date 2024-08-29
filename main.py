@@ -1,6 +1,13 @@
 from fastapi import FastAPI, Request
-from routers import animals, users
+from routers.users import users
+from routers.animals import animals
+from models import animal
+from config.db import engine
 import time
+
+
+animal.Base.metadata.create_all(bind=engine)
+
 
 app = FastAPI()
 

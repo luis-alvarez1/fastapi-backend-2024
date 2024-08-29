@@ -1,13 +1,15 @@
-from sqlalchemy import Table, Column
-from sqlalchemy.sql.sqltypes import Integer, String
-from config.db import meta, engine
- 
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy.orm import relationship
+from config.db import Base
 
-animal = Table("animals", meta, 
-               Column("id", Integer, primary_key=True),
-               Column("name", String(255)),
-               Column("age", Integer),
-               Column("habitad", String(255))
-               )
+class Animal(Base):
+    __tablename__ = "animals"
 
-meta.create_all(engine)
+    id = Column(Integer, primary_key=True)
+    name = Column(String(255))
+    habitad = Column(String(255))
+    age = Column(Integer, default=0)
+    type = Column(String(255))
+
+
+
