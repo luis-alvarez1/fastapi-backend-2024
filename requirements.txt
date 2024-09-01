@@ -1,7 +1,8 @@
-fastapi==0.112.2
+fastapi[all]
 pydantic==2.8.2
 PyJWT==2.9.0
 SQLAlchemy==2.0.32
 PyMySQL
 python-multipart
 redis
+passlib[bcrypt]
