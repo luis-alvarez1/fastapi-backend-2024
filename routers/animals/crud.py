@@ -50,6 +50,7 @@ def update_animal(db: Session, id: str, animal: AnimalSchema)-> AnimalModel | No
 			AnimalModel.habitad : animal.habitad,
 		})
 		db.commit()
+		# retorno el animal actualizado de db
 		animal = get_animal_by_id(db=db, id=id)
 		
   
