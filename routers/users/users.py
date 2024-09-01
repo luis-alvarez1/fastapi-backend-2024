@@ -37,6 +37,15 @@ def create_users( user : UserSchema, db:Session = Depends(get_db)):
     db_user = crud.create_user(db= db, user=user)
     return db_user
 
+@router.get("/{id}", status_code=status.HTTP_200_OK )
+async def get_user_by_id(id: str, db: Session = Depends(get_db)):
+    user = crud.get_users_by_id(db= db, id=id )
+    
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    
+    return user
+
 # def authenticate_user(fake_db, username: str, password: str):
 #     user = get_user(fake_db, username)
 #     if not user:
